@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lotto</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        #wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-self: center;
+            align-items: center;
+            flex-direction: column;
+            flex-wrap: wrap;
+        }
+
+        .lotto-balls {
+            margin: 20px;
+        }
+
+        .lotto-balls__ball {
+            width: 50px;
+            height: 50px;
+            margin: 5px;
+            padding: 5px;
+            text-align: center; /* 수평 정렬 */
+            line-height: 50px; /* 수직 정렬 */
+            border: 1px solid black;
+            border-radius: 50%;
+            display: inline-block;
+        }
+    </style>
+
+</head>
+<body>
+    <h1>Lotto</h1>
+    <button onclick="getRandomNumbers()">Good Luck!</button>
+    
+    <div id="wrap"></div>
+
+    <script>
+        function getRandomNumbers() {
+
+            let wrap = document.getElementById("wrap");
+
+            wrap.innerHTML = '';
+
+            for (let i = 0; i < 5; i++) {
+
+                let numbers = Array.from({length: 45}, (_, i) => i + 1);
+                            
+                let lottoBalls = document.createElement("div");
+                 lottoBalls.className = "lotto-balls";
+
+                for (let j = 0; j < 6; j++) {
+                    let lottoBall = document.createElement("div");
+                    lottoBall.className = "lotto-balls__ball";
+
+                    let randomIndex = Math.floor(Math.random() * numbers.length);
+
+                    lottoBall.innerText = numbers[randomIndex];
+                    lottoBalls.appendChild(lottoBall);
+                    numbers.splice(randomIndex, 1);
+                }
+                
+                wrap.appendChild(lottoBalls);
+
+            }
+        }
+    </script>
+</body>
+</html>
